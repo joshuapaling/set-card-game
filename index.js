@@ -1,10 +1,11 @@
-var deck = require('./deck');
+var createGame = require('./game');
 var express = require('express');
 var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var nextUserID = 1;
 var users = {};
+var game = createGame();
 
 app.use(express.static('public'));
 
@@ -14,7 +15,7 @@ app.get('/', function(req, res){
 
 io.on('connection', function(socket){
   console.log('total no cards is:');
-  console.log(deck().cards.length);
+  console.log(game.deck.cards.length);
   var id = nextUserID;
   users[id] = {
     nickname: 'user' + id
@@ -22,6 +23,7 @@ io.on('connection', function(socket){
   socket.userId = id;
   nextUserID++;
   socket.broadcast.emit('user_connected', users[socket.userId.toString()]);
+  socket.emit('game_update', game);
 
   socket.on('disconnect', function(){
     io.emit('user_disconnected');

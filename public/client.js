@@ -5,6 +5,17 @@ $('form').submit(function () {
   return false;
 });
 
+socket.on('game_update', function(game){
+  game.deck.cards.forEach(function(card){
+    $('#game').append('<div>'
+      + ' Fill: ' + card.fill
+      + ' Color: ' + card.color
+      + ' Number: ' + card.number
+      + ' Shape: ' + card.shape
+      +'</div>');
+  });
+});
+
 socket.on('user_connected', function(user){
   $('#messages').append('<li>' + '* ' + user.nickname + ' connected *' + '</li>');
 });
