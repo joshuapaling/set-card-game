@@ -7,7 +7,8 @@ var nextUserID = 1;
 var users = {};
 var game = createGame();
 
-app.use(express.static('public'));
+app.use(express.static('./public'));
+app.use(express.static('./node_modules/bootstrap/dist'));
 
 app.get('/', function(req, res){
   res.sendFile(__dirname + '/index.html');

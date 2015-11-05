@@ -7,7 +7,7 @@ $('form').submit(function () {
 
 socket.on('game_update', function(game){
   game.deck.cards.forEach(function(card){
-    $('#game').append('<div>'
+    $('#game').append('<div class="card">'
       + ' Fill: ' + card.fill
       + ' Color: ' + card.color
       + ' Number: ' + card.number
