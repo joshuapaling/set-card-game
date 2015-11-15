@@ -54,7 +54,7 @@
 
 	var APP = __webpack_require__(199);
 	var Board = __webpack_require__(252);
-	var Whoops404 = __webpack_require__(253);
+	var Whoops404 = __webpack_require__(254);
 
 	var routes = React.createElement(
 	  Route,
@@ -31150,42 +31150,25 @@
 /* 252 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	var React = __webpack_require__(1);
+	var Card = __webpack_require__(253);
 
 	var Board = React.createClass({
-	  displayName: "Board",
+	  displayName: 'Board',
 
 	  render: function render() {
 	    if (!this.props.game) {
-	      return React.createElement("div", null);
+	      return React.createElement('div', null);
 	    }
+
 	    var cards = [];
 	    this.props.game.deck.cards.forEach(function (card) {
-	      cards.push(React.createElement(
-	        "div",
-	        { className: "card" },
-	        "Fill: ",
-	        card.fill,
-	        " ",
-	        React.createElement("br", null),
-	        "Color: ",
-	        card.color,
-	        " ",
-	        React.createElement("br", null),
-	        "Number: ",
-	        card.number,
-	        " ",
-	        React.createElement("br", null),
-	        "Shape: ",
-	        card.shape,
-	        " ",
-	        React.createElement("br", null)
-	      ));
+	      cards.push(React.createElement(Card, { card: card }));
 	    });
 	    return React.createElement(
-	      "div",
+	      'div',
 	      null,
 	      cards
 	    );
@@ -31196,6 +31179,81 @@
 
 /***/ },
 /* 253 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+
+	var Card = React.createClass({
+	  displayName: 'Card',
+
+	  render: function render() {
+	    var shapes = [];
+	    var theShape;
+	    var classes = 'shape ' + this.props.card.shape;
+
+	    var oval = React.createElement(
+	      'svg',
+	      { viewBox: '-3 -4 115 64' },
+	      React.createElement('path', { className: classes, stroke: 'black', 'stroke-width': '4', 'stroke-linejoin': 'miter', fill: 'none',
+	        d: 'M30 0 L80,0 C120,0 120,50 80,50 L30 50 C-10,50 -10,0 30,0 ' })
+	    );
+
+	    var squiggle = React.createElement(
+	      'svg',
+	      { viewBox: '-3 -4 115 64' },
+	      React.createElement('path', { className: classes, stroke: 'black', 'stroke-width': '4', 'stroke-linejoin': 'miter', fill: 'none',
+	        d: 'M0 30 C0,0 33,0 50,12 S70,20 85,8 S105,10 103,26 S90,70 60,45 S30,50 16,55 S00,40 0,30 ' })
+	    );
+
+	    var diamond = React.createElement(
+	      'svg',
+	      { width: '100', height: '60', viewBox: '-5 -4 115 64' },
+	      React.createElement('path', { className: classes, 'stroke-width': '4', 'stroke-linejoin': 'miter', d: 'M0 30 L50 0 L100 30 L50 60 Z' })
+	    );
+
+	    if (this.props.card.shape === 'squiggle') {
+	      theShape = squiggle;
+	    } else if (this.props.card.shape === 'diamond') {
+	      theShape = diamond;
+	    } else {
+	      theShape = oval;
+	    }
+
+	    for (var i = 1; i <= this.props.card.number; i++) {
+	      shapes.push(theShape);
+	    }
+
+	    var classes = 'card ' + this.props.card.fill + ' ' + this.props.card.color + ' ' + this.props.card.shape;
+	    return React.createElement(
+	      'div',
+	      { className: classes },
+	      'Fill: ',
+	      this.props.card.fill,
+	      ' ',
+	      React.createElement('br', null),
+	      'Color: ',
+	      this.props.card.color,
+	      ' ',
+	      React.createElement('br', null),
+	      'Number: ',
+	      this.props.card.number,
+	      ' ',
+	      React.createElement('br', null),
+	      'Shape: ',
+	      this.props.card.shape,
+	      ' ',
+	      React.createElement('br', null),
+	      shapes
+	    );
+	  }
+	});
+
+	module.exports = Card;
+
+/***/ },
+/* 254 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';

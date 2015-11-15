@@ -8,6 +8,11 @@ form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 
 #messages li { padding: 5px 10px; }
 #messages li:nth-child(odd) { background: #eee; }
 
+
+$red: #ff0073;
+$green: #3acc40;
+$purple: #7673cf;
+
 .card {
   display: block;
   border: 1px solid #bbb;
@@ -16,4 +21,26 @@ form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 
   height: 260px;
   float: left;
   border-radius: 5px;
+}
+
+.card.solid.red    .shape { background: $red; fill: $red; }
+.card.solid.green  .shape { background: $green; fill: $green; }
+.card.solid.purple .shape { background: $purple; fill: $purple; }
+
+.card svg {
+  width: 80%;
+  height: 70px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+.card .shape {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  height: 70px;
+  border-radius: 35px;
 }
